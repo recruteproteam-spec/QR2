@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://qrticketpro.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+
+# Allow public pages
+Allow: /
+Allow: /events
+Allow: /events/*
