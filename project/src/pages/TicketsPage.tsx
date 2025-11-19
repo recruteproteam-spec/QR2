@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 import { useEventStore } from '../stores/eventStore';
 
 const TicketsPage: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
   const events = useEventStore(state => state.events);
@@ -71,6 +71,8 @@ const TicketsPage: React.FC = () => {
     try {
       const ticketData = {
         id: `${event.id}-${Date.now()}`,
+        userId: user?.id || 'guest',
+        eventId: event.id,
         eventName: event.title,
         eventDate: new Date(event.date),
         location: event.location,

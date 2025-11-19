@@ -51,7 +51,7 @@ try {
     // Create tickets table with proper schema
     $createTicketsTable = "
         CREATE TABLE IF NOT EXISTS tickets (
-            id VARCHAR(50) PRIMARY KEY,
+            id VARCHAR(100) PRIMARY KEY,
             event_id VARCHAR(50) NOT NULL,
             user_id VARCHAR(50) NOT NULL,
             event_name VARCHAR(255) NOT NULL,

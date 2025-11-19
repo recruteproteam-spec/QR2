@@ -335,6 +335,8 @@ const DashboardPage = () => {
         // Generate custom PDF avec prix personnalisé et heure
         const doc = await generateCustomTicketPDF({
           id: ticket.id,
+          userId: currentUser.id,
+          eventId: event.id,
           eventName: ticketData.eventName,
           eventDate: ticketData.eventDate,
           location: ticketData.location,

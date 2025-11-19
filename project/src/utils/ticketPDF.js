@@ -62,8 +62,8 @@ export const generateTicketPDF = async (ticket) => {
       yPosition += 8;
     });
 
-    // QR Code
-    const validationUrl = `https://www.qrticketpro.com/validate.php?id=${ticket.id}`;
+    // QR Code with user_id and event_id
+    const validationUrl = `https://www.qrticketpro.com/validate.php?user_id=${ticket.userId}&event_id=${ticket.eventId}`;
     const qrCodeDataUrl = await QRCode.toDataURL(validationUrl, {
       errorCorrectionLevel: 'H',
       margin: 1,

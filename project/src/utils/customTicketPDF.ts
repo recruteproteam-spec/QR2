@@ -10,6 +10,8 @@ interface TicketData {
   location: string;
   ticketType: string;
   price: number;
+  userId: string;
+  eventId: string;
   logo?: string;
   startTime?: string;
   endTime?: string;
@@ -65,8 +67,8 @@ export const generateCustomTicketPDF = async (ticket: TicketData): Promise<jsPDF
       }
     }
 
-    // ✅ Generate QR code with DIRECT URL for validation
-    const validationUrl = `https://www.qrticketpro.com/validate.php?id=${ticket.id}`;
+    // ✅ Generate QR code with DIRECT URL for validation using user_id and event_id
+    const validationUrl = `https://www.qrticketpro.com/validate.php?user_id=${ticket.userId}&event_id=${ticket.eventId}`;
 
     const qrCodeDataUrl = await QRCode.toDataURL(validationUrl, {
       errorCorrectionLevel: 'H',
@@ -165,11 +167,10 @@ export const generateCustomTicketPDF = async (ticket: TicketData): Promise<jsPDF
     // Reset color
     doc.setTextColor(0, 0, 0);
 
-    // Ticket ID with timestamp
+    // Ticket ID - EXACTLY as stored in database
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
-    const ticketIdWithTimestamp = `${ticket.id}-${Date.now()}`;
-    doc.text(`Ticket ID: ${ticketIdWithTimestamp}`, infoX, currentY);
+    doc.text(`Ticket ID: ${ticket.id}`, infoX, currentY);
     currentY += 15;
 
     // ✅ Add QR Code validation URL info
